@@ -251,6 +251,44 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
     setFixedSize(width(), height());
 
+    // В конце конструктора MainWindow, после setFixedSize(...)
+    QFont fancyFont("Segoe Script", 11);  // рукописный стиль
+    setFont(fancyFont);
+
+    // Базовый стиль для всех QSlider
+    QString sliderStyle = R"(
+    QSlider::groove:horizontal {
+        height: 6px;
+        background: #d0d0d0;
+        border-radius: 3px;
+    }
+    QSlider::handle:horizontal {
+        background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                                    stop:0 #66ccff, stop:1 #3399ff);
+        border: 1px solid #5c5c5c;
+        width: 14px;
+        height: 14px;
+        margin: -5px 0;
+        border-radius: 7px;
+    }
+    QSlider::handle:horizontal:hover {
+        background: qlineargradient(x1:0,y1:0,x2:0,y2:1,
+                                    stop:0 #99ddff, stop:1 #66bbff);
+    }
+    QSlider::sub-page:horizontal {
+        background: #66b3ff;
+        border-radius: 3px;
+    }
+)";
+    setStyleSheet(sliderStyle);
+
+    // Для QLabel авторства и предупреждения можно сделать тонкий серый текст
+    authorLabel->setStyleSheet("color: gray; font-style: italic; font-size: 11pt;");
+    warningLabel->setStyleSheet("color: darkred; font-weight: bold;");
+
+
+
+
 
     // ---------- connect signals ----------
     connect(sR, &QSlider::valueChanged, this, [this](int){ if(!internalUpdate) onRgbSliderChanged(); });
