@@ -139,7 +139,7 @@ Lab rgbToLab(const RGB &rgb) {
     return xyzToLab(xyz);
 }
 
-std::pair<RGB,bool> labToRgb(const Lab &lab) {
+std::pair<RGB, bool> labToRgb(const Lab &lab) {
     XYZ xyz = labToXyz(lab);
     return xyzToRgb(xyz);
 }
@@ -251,11 +251,11 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowFlags(windowFlags() & ~Qt::WindowMaximizeButtonHint);
     setFixedSize(width(), height());
 
-    // В конце конструктора MainWindow, после setFixedSize(...)
-    QFont fancyFont("Segoe Script", 11);  // рукописный стиль
+
+    QFont fancyFont("Segoe Script", 11);
     setFont(fancyFont);
 
-    // Базовый стиль для всех QSlider
+
     QString sliderStyle = R"(
     QSlider::groove:horizontal {
         height: 6px;
@@ -282,7 +282,6 @@ MainWindow::MainWindow(QWidget *parent)
 )";
     setStyleSheet(sliderStyle);
 
-    // Для QLabel авторства и предупреждения можно сделать тонкий серый текст
     authorLabel->setStyleSheet("color: gray; font-style: italic; font-size: 11pt;");
     warningLabel->setStyleSheet("color: darkred; font-weight: bold;");
 
